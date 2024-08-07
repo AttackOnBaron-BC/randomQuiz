@@ -41,6 +41,7 @@ const questions = [
   
   function showQuestions()
   {
+    let correctAnswer = 0;
     const questions = JSON.parse(localStorage.getItem("questionList"));
   
     let questionText = document.querySelector("ul");  
@@ -49,8 +50,27 @@ const questions = [
       let li = document.createElement("li");
       li.innerHTML = q.question;
       questionText.appendChild(li);
+
+      const test = questionText.appendChild(li);
+      const br = document.createElement("br");
+      test.appendChild(br);
+
+      q.choices.forEach(e => {
+        const button = document.createElement("button");
+        button.textContent = e;
+        test.appendChild(button);
+        button.addEventListener('click', function(event){
+          if(event === q.correct)
+            correctAnswer++;
+        })
+      });
     } 
+
+    console.log(correctAnswer);
   }
+
+  
+ 
   
   questionList();
   showQuestions();
