@@ -1,164 +1,102 @@
 const questions = [
-    {
-      number: 1,
-      question: "What is the capital of United Kingdom?",
-      choices: ["London", "Paris", "Nairobi"],
-      correct: "Paris"
-    },
-    {
-      number: 2,
-      question: "How many days are there in a week?",
-      choices: ["Five", "Three", "Seven"],
-      correct: "Seven"
-    },
-    {
-      number: 3,
-      question: "What is the closest planet to the sun?",
-      choices: ["Earth", "Mercury", "Saturn"],
-      correct: "Mercury"
-    },
-  ];
-  
-// var arr = [];
-// const questionToShow = 3;
+  {
+    number: 1,
+    question: "What is the capital of United Kingdom?",
+    choices: ["London", "Paris", "Nairobi"],
+    correct: 0
+  },
+  {
+    number: 2,
+    question: "How many days are there in a week?",
+    choices: ["Five", "Three", "Seven"],
+    correct: 2
+  },
+  {
+    number: 3,
+    question: "What is the closest planet to the sun?",
+    choices: ["Earth", "Mercury", "Saturn"],
+    correct: 1
+  },
+];
 
-// function randomQ(questionsLength){
-//   while(arr.length < questionsLength){
-//       var r = Math.floor(Math.random() * questionToShow);
-//       if(arr.indexOf(r) === -1) arr.push(r);
-//   }
-// }
-
-// var qs = {};
-// function questionList(){
-//   randomQ(questions.length);
-
-//   var list = [];
-//   for (let a of arr) {
-//     if(a < questions.length)
-//       list.push(questions[a]);
-//   }
-//   localStorage.setItem("questionList", JSON.stringify(list));    
-// }
-
-// function showQuestions()
-// {
-//   let questionNumber = 1;
-//   const questions = JSON.parse(localStorage.getItem("questionList"));
-
-//   const quiz = document.getElementById("quiz");
-//   quiz.innerHTML = "";
-
-//   for(let q of questions)
-//   {
-//     console.log(q.choices);
-//     const questionDiv = document.createElement("div");
-//     const questionText = document.createElement("h3");
-//     questionText.textContent = q.question;
-//     questionDiv.appendChild(questionText);
-
-//     const answers = q.choices;
-//     for(let j = 0; j < answers.length; j++)
-//     {
-//       const answerDiv = document.createElement("div");
-//       const radioInput = document.createElement("input");
-//       radioInput.type = "radio";
-//       radioInput.name = `question-${questionNumber}`;
-//       radioInput.value = j;
-
-//       const answerLabel = document.createElement("label");
-//       answerLabel.textContent = answers[j];
-//       answerDiv.appendChild(radioInput);
-//       answerDiv.appendChild(answerLabel);
-//       questionDiv.appendChild(answerDiv);
-//     }
-//     quiz.appendChild(questionDiv);
-//   }
-// }
-
-// function submitQuiz()
-// {  
-//   let score = 0;
-//   const quizQuestions = document.querySelectorAll(".question");
-//   console.log(quizQuestions);
-//   quizQuestions.forEach((questionDiv, index) => {
-//     const selectedAnswer = questionDiv.querySelector("input[type='radio']:checked");
-//     if (selectedAnswer) {
-//       const selectedAnswerIndex = parseInt(selectedAnswer.value);
-//       const correctAnswerIndex = questions[index].correctAnswer;
-//       if (selectedAnswerIndex === correctAnswerIndex) {
-//         score++;
-//       }
-//     }
-//   });
-//   const scoreDiv = document.getElementById("score");
-//   scoreDiv.textContent = `Your score is ${score} out of 5.`;
-// }
-
-// let count = 0;
-// function checkAnswer(t)
-// {
-//   t++;
-//   count += t;
-//   console.log(count);
-// }
-
-
-
-
-// questionList();
-// showQuestions();
-
-function generateRandomQuestions() {
-  const randomQuestions = [];
-  while (randomQuestions.length < 2) {
-      const randomIndex = Math.floor(Math.random() * questions.length);
-      if (!randomQuestions.includes(questions[randomIndex])) {
-          randomQuestions.push(questions[randomIndex]);
-      }
+var arr = [];
+function randomQ(questionsLength){
+  while(arr.length < questionsLength){
+      var r = Math.floor(Math.random() * 3);
+      if(arr.indexOf(r) === -1) arr.push(r);
   }
-  console.log(randomQuestions);
-  return randomQuestions;
 }
 
-function displayQuestions(questions) {
+var qs = {};
+function questionList(){
+    randomQ(questions.length);
+
+    var list = [];
+    for (let a of arr) {
+      if(a < questions.length)
+        list.push(questions[a]);
+    }
+    localStorage.setItem("questionList", JSON.stringify(list));    
+}
+
+const questionsList = JSON.parse(localStorage.getItem("questionList"));
+
+const answers = [];
+function showQuestions()
+{
+
   const quizDiv = document.getElementById('quiz');
   console.log(questions);
-  questions.forEach((q, index) => {
+  questionsList.forEach((q, index) => {
       console.log(q);
       const questionDiv = document.createElement('div');
       questionDiv.innerHTML = `<p>${index + 1}. ${q.question}</p>`;
-      q.choices.forEach((opt) => {
-          
-          const optionInput = document.createElement('input');
-          optionInput.type = 'radio';
-          optionInput.name = `question${index}`;
-          console.log(optionInput.name);
-          optionInput.value = opt;
-          questionDiv.appendChild(optionInput);
-          const optionLabel = document.createElement('label');
-          optionLabel.innerHTML = opt;
-          questionDiv.appendChild(optionLabel);
-          questionDiv.appendChild(document.createElement('br'));
+      const newElement = document.createElement('questionNumber');
+      newElement.textContent = q.number
+      console.log(q.number);
+      answers.push(q.number);
+      q.choices.forEach((opt) => {      
+        const optionInput = document.createElement('input');
+        optionInput.type = 'radio';
+        optionInput.name = `question${index}`;
+        optionInput.setAttribute("questionnumber", q.number);
+        console.log(opt);
+        optionInput.value = opt;
+        questionDiv.appendChild(optionInput);
+        const optionLabel = document.createElement('label');
+        optionLabel.innerHTML = opt;
+        questionDiv.appendChild(optionLabel);
+        questionDiv.appendChild(document.createElement('br'));
       });
       quizDiv.appendChild(questionDiv);
-  });
+    });
 }
 
+let score = 0;
+let ans = [];
 function submitQuiz() {
-  let score = 0;
-  questions.forEach((q, index) => {
-      const selectedOption = document.querySelector(`input[name="question${index}"]:checked`);
-      console.log(selectedOption);
-      // selectedOption.forEach(e =>
-      // {
-      //   if(e.value === q.correct)
-      //     score++;
-      // }
-      // );
-  });
-  alert(`Your score is: ${score}/5`);
+  
+  console.log(questionsList.length);
+
+  for(let i = 0; i < questionsList.length; i++){
+    const selectedOption = document.querySelector(`input[name="question${i}"]:checked`);
+    ans.push(selectedOption.value);
+  }
+  checkAnswer(ans);
 }
 
-const randomQuestions = generateRandomQuestions();
-displayQuestions(randomQuestions);
+let count = 0;
+function checkAnswer(answers)
+{
+  for(let i = 0; i < answers.length; i++)
+  {
+    if(answers[i] === questionsList[i].choices[questionsList[i].correct])
+    {
+      score++;
+    }
+  }
+  alert(`You scored ${score} out of ${questionsList.length}`);
+}
+
+questionList();
+showQuestions();
