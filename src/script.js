@@ -80,7 +80,9 @@ function submitQuiz() {
 
   for(let i = 0; i < questionsList.length; i++){
     const selectedOption = document.querySelector(`input[name="question${i}"]:checked`);
-    ans.push(selectedOption.value);
+    if(selectedOption){
+      ans.push(selectedOption.value);
+    }    
   }
   checkAnswer(ans);
 }
