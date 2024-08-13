@@ -1,19 +1,6 @@
 const questions = [
   {
     number: 1,
-    question: "What is the capital of United Kingdom?",
-    choices: ["London", "Paris", "Nairobi"],
-    correct: 0
-  },
-  {
-    number: 2,
-    question: "How many days are there in a week?",
-    choices: ["Five", "Three", "Seven"],
-    correct: 2
-  },
-  {const questions = [
-  {
-    number: 1,
     question: "What is the command we use to create a new file?",
     choices: ["mkdir", "touch", "ls"],
     correct: 0
