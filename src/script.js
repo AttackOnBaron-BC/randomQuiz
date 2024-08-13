@@ -36,35 +36,9 @@ const questions = [
     number: 6,
     question: "In C++, which keyword is used to declare a constant variable?",
     choices: ["static", "final", "const"],
-    question: "What is an HTML semantic element?",
-    choices: ["A semantic element clearly describes its meaning to both the browser and the developer.", "Semantic elements are outdated and are no longer used in HTML.", "Semantic elements, like <div>, hold the important content together so it's easy to understand."],
-    correct: 0
-  },
-  {
-    number: 3,
-    question: "What is the purpose of the alt attribute for images?",
-    choices: ["To provide context for the images in the cases where they are not observable, either due to an accessibility challenge or a broken link.", "To prevent search engines from indexing the image.", "To make the image load faster. "],
-    correct: 0
-  },
-  {
-    number: 4,
-    question: "What is the purpose of the <head> element in HTML?",
-    choices: ["The <head> element contains metadata about the document, such as its title and links to its stylesheets.", "The <head> element is used to define the main content of the document.", "The <head> element is used to define the footer of the document."],
     correct: 0
   },
   
-  {
-    number: 5,
-    question: "Which SQL command is used to retrieve data from a database?",
-    choices: ["GET", "FETCH", "SELECT"],
-    correct: 2
-  },
-  {
-    number: 6,
-    question: "In C++, which keyword is used to declare a constant variable?",
-    choices: ["static", "final", "const"],
-    correct: 2
-  },
   {
     number: 7,
     question: "What does CSS stand for?",
@@ -77,45 +51,7 @@ const questions = [
     choices: ["Queue", "Stack", "Linked List"],
     correct: 1
   },
-  {
-    number: 9,
-    question: "In Git, which command is used to create a new branch?",
-    choices: ["git branch", "git checkout", "git commit"],
-    correct: 0
-  },
-  {
-    number: 10,
-    question: "What is the correct way to comment a single line in Java?",
-    choices: ["// Comment", "/* Comment */", "# Comment"],
-    correct: 0
-  },
-  {
-    number: 11,
-    question: "Which programming language is often used for developing Android apps?",
-    choices: ["Swift", "Kotlin", "Objective-C"],
-    correct: 1
-  },
-  {
-    number: 12,
-    question: "What does API stand for?",
-    choices: ["Application Programming Interface", "Advanced Programming Integration", "Automated Program Interface"],
-    correct: 0
-  },
-  {
-    number: 13,
-    question: "In Python, which method is used to add an element to the end of a list?",
-    choices: ["append()", "push()", "add()"],
-    correct: 0
-  },
-  {
-    number: 14,
-    question: "Which symbol is used to access properties of an object in JavaScript?",
-    choices: ["->", ".", "::"],
-    number: 7,
-    question: "What does CSS stand for?",
-    choices: ["Computer Style Sheets", "Cascading Style Sheets", "Creative Style Systems"],
-    correct: 1
-  },
+  
   {
     number: 8,
     question: "Which data structure follows the Last-In-First-Out (LIFO) principle?",
