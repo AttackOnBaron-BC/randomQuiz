@@ -131,6 +131,7 @@ function randomQ(selectedAmount) {
   return arr; // Return array of random question indices
 }
 
+let quizStartTime;
 function generateQuiz() {
   const selectedAmount = parseInt(document.getElementById("questionAmount").value); // Get number of questions selected
   const randomQuestions = randomQ(selectedAmount); // Get random questions based on selection
@@ -164,6 +165,7 @@ function showQuestions() {
       questionDiv.appendChild(optionLabel);
       questionDiv.appendChild(document.createElement('br'));
     });
+    quizDiv.appendChild(document.createElement('hr')); // Add horizontal line between questions
     quizDiv.appendChild(questionDiv);
   });
 }
