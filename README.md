@@ -16,7 +16,10 @@ Link
 No need to deploy, please directly visit our website!
 
 ## Screenshots
-
+![alt text](image-1.png)
+![alt text](image-2.png)
+![alt text](image-3.png)
+![alt text](image-4.png)
 ## Features
 - The random quiz can randomly generate 5 different questions,
 - It will show the scores after clicking the submit button.
