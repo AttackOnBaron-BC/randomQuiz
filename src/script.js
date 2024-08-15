@@ -3,7 +3,7 @@ const questions = [
     number: 1,
     question: "What is the command we use to create a new file?",
     choices: ["mkdir", "touch", "ls"],
-    correct: 0
+    correct: 1 // Correct answer is "touch"
   },
   {
     number: 2,
@@ -125,13 +125,12 @@ const questions = [
 function randomQ(selectedAmount) {
   let arr = [];
   while (arr.length < selectedAmount) {
-    const r = Math.floor(Math.random() * questions.length);
+    const r = Math.floor(Math.random() * questions.length); // Generate random index
     if (arr.indexOf(r) === -1) arr.push(r); // Ensure no duplicate questions
   }
   return arr; // Return array of random question indices
 }
 
-let quizStartTime;
 function generateQuiz() {
   const selectedAmount = parseInt(document.getElementById("questionAmount").value); // Get number of questions selected
   const randomQuestions = randomQ(selectedAmount); // Get random questions based on selection
@@ -139,9 +138,7 @@ function generateQuiz() {
   let quizQuestions = randomQuestions.map(index => questions[index]); // Map selected questions
   localStorage.setItem("questionList", JSON.stringify(quizQuestions)); // Store questions in localStorage
 
-  showQuestions(); // Call function to display questions
-  quizStartTime = new Date(); // Record the start time of the quiz
-
+  showQuestions(); // Call function to display questions in the modal
   const quizModal = new bootstrap.Modal(document.getElementById('quizModal')); // Initialize Bootstrap modal
   quizModal.show(); // Show the modal
 }
@@ -153,7 +150,7 @@ function showQuestions() {
 
   questionsList.forEach((q, index) => {
     const questionDiv = document.createElement('div');
-    questionDiv.innerHTML = `<p>${index + 1}. ${q.question}</p>`; // Add question text
+    questionDiv.innerHTML = `<p>${index + 1}. ${q.question}</p>`;
     q.choices.forEach((opt, optIndex) => {
       const optionInput = document.createElement('input');
       optionInput.type = 'radio';
@@ -161,38 +158,41 @@ function showQuestions() {
       optionInput.value = optIndex; // Set value to choice index
       questionDiv.appendChild(optionInput);
       const optionLabel = document.createElement('label');
-      optionLabel.innerHTML = opt; // Add choice text
+      optionLabel.innerHTML = opt;
       questionDiv.appendChild(optionLabel);
       questionDiv.appendChild(document.createElement('br'));
     });
-    quizDiv.appendChild(document.createElement('hr')); // Add horizontal line between questions
     quizDiv.appendChild(questionDiv);
+
+    if (index < questionsList.length - 1) {
+      const hr = document.createElement('hr'); // Create a line to separate questions
+      quizDiv.appendChild(hr);
+    }
   });
 }
+
+let score = 0;
 
 function submitQuiz() {
   const questionsList = JSON.parse(localStorage.getItem("questionList")); // Retrieve questions from localStorage
   let score = 0; // Reset score to zero
 
   questionsList.forEach((q, index) => {
-    const selectedOption = document.querySelector(`input[name="question${index}"]:checked`); // Get selected option
+    const selectedOption = document.querySelector(`input[name="question${index}"]:checked`);
     if (selectedOption && parseInt(selectedOption.value) === q.correct) {
       score++; // Increment score if correct answer
     }
   });
 
-  const quizEndTime = new Date(); // Record the end time of the quiz
-  const timeTaken = (quizEndTime - quizStartTime) / 1000; // Calculate time taken in seconds
-
-  displayResults(score, questionsList.length, timeTaken); // Call function to display results
-
   const quizModal = bootstrap.Modal.getInstance(document.getElementById('quizModal')); // Get modal instance
   quizModal.hide(); // Close the modal after submitting the quiz
+
+  displayResults(score, questionsList.length); // Call function to display results
 }
 
-function displayResults(score, total, timeTaken) {
+function displayResults(score, total) {
   const resultsText = document.getElementById('resultsText');
-  resultsText.innerHTML = `Score: ${score} out of ${total}<br>Time: ${timeTaken.toFixed(2)} seconds`; // Display score and time taken in separate lines
+  resultsText.innerHTML = `Score: ${score} out of ${total}`; // Display score
   const resultsCard = document.getElementById('quiz-results');
   resultsCard.style.display = 'block'; // Show results section
 }
