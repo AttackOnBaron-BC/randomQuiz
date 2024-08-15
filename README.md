@@ -7,11 +7,12 @@ https://attackonbaron-bc.github.io/randomQuiz/
 
 ### User Story
 - **As a student**, I want to open this web page and it will generate random questions for me to answer.
-- **After I** clicked the submit button, there will be a pop up to tell me how many scores I have got.
+- **After I** clicked the submit button, it will tell me how many scores I have got.
 
 ### Acceptance Criteria
--   A student is able to visit the web page, and select to generate 1 to 5 random question(s).
--   It will pop up the modal with the questions, after clicking the submit button, the modal will disappear and the page will show the score and time used.
+- As a student, I open this web page and it will generate random questions for me to answer in a pop up modal
+- After I clicked the submit button, it will tell me how many scores I have got.
+
 
 ## Deployment
 No need to deploy, please directly visit our website!
